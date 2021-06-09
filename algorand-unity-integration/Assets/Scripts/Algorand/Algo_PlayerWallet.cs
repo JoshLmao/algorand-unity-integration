@@ -17,7 +17,7 @@ public class Algo_PlayerWallet : MonoBehaviour
 
     private void Awake()
     {
-        m_algodAPI = GameObject.FindObjectOfType<AlgorandSceneHelper>().GetAlgodAPI();
+        m_algodAPI = AlgorandSceneHelper.Instance.GetAlgodAPI();
         // Load user's wallet
         LoadWallet();
     }
@@ -35,8 +35,8 @@ public class Algo_PlayerWallet : MonoBehaviour
     // Prints relevant wallet info of the given account
     private void PrintPlayerWalletInfo(Account algoAccount)
     {
-        Debug.Log($"Wallet Address = '{m_playerAlgoAccount.Address}'");
-        //Debug.Log($"Mnemonic = '{m_playerAlgoAccount.ToMnemonic()}");
+        Debug.Log($"Player ALGO Address = '{m_playerAlgoAccount.Address}'");
+        //Debug.Log($"Player Mnemonic = '{m_playerAlgoAccount.ToMnemonic()}");
 
         if (m_algodAPI != null) 
         {

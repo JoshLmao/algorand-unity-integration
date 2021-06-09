@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AppConstants
+public class AppConfig
 {
     // Gets the purestake API key
     public static string PURESTAKE_API_KEY = "";

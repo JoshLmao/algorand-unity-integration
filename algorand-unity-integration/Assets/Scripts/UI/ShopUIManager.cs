@@ -21,7 +21,7 @@ public class ShopUIManager : MonoBehaviour
     void Start()
     {
         // Get Algo API first
-        m_algoSceneHelper = GameObject.FindObjectOfType<AlgorandSceneHelper>();
+        m_algoSceneHelper = AlgorandSceneHelper.Instance;
 
         List<ShopItem> allItems = ShopManager.GetShopItems();
         if (ItemParent != null && allItems.Count > 0)
@@ -87,7 +87,7 @@ public class ShopUIManager : MonoBehaviour
 
             var playerAccount = playerWallet.GetPlayerAccount();
             ulong microAlgoAmount = (ulong)item.MicroAlgoCost;
-            string txId = m_algoSceneHelper.MakePayment(playerAccount, new Address(AppConstants.APP_WALLET_ADDRESS), microAlgoAmount, $"UNITY GAME TEST -> Buy item '{item.Name}'", () =>
+            string txId = m_algoSceneHelper.MakePayment(playerAccount, new Address(AppConfig.APP_WALLET_ADDRESS), microAlgoAmount, $"UNITY GAME TEST -> Buy item '{item.Name}'", () =>
             {
                 Debug.Log("Payment complete!");
             });

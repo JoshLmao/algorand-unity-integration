@@ -30,7 +30,7 @@ public class RewardPlayerBtn : MonoBehaviour
 
     private void OnRewardPlayer()
     {
-        Account gameAccount = new Account(AppConstants.APP_WALLET_MNEMONIC);
+        Account gameAccount = new Account(AppConfig.APP_WALLET_MNEMONIC);
         Account playerAccount = GameObject.FindObjectOfType<Algo_PlayerWallet>().GetPlayerAccount();
 
         // Reward player with 0.05 ALGO

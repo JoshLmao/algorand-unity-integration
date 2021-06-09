@@ -6,23 +6,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class AlgorandSceneHelper : MonoBehaviour
+public class AlgorandSceneHelper : Singleton<AlgorandSceneHelper>
 {
     private AlgodApi m_algodAPI = null;
-    private void Awake()
+
+    public AlgorandSceneHelper()
     {
-        m_algodAPI = new AlgodApi(GetAPIAddress(), AppConstants.PURESTAKE_API_KEY);
+        m_algodAPI = new AlgodApi(GetAPIAddress(), AppConfig.PURESTAKE_API_KEY);
     }
 
-    void Start()
+    protected override void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.Awake();
     }
 
     /// <summary>
@@ -63,9 +58,22 @@ public class AlgorandSceneHelper : MonoBehaviour
     /// <returns>Transaction ID of the payment from -> to</returns>
     public string MakePayment(Account fromAccount, Address toAddress, ulong microAlgoAmount, string txMessage, System.Action onTransactionSuccess = null)
     {
-        if (!Address.IsValid(AppConstants.APP_WALLET_ADDRESS))
+        // Check from/to is not null
+        if (fromAccount == null || toAddress == null)
         {
-            Debug.LogError("Invalid recieve address");
+            Debug.LogError("From/To account/address is invalid");
+            return null;
+        }
+        // Check address is valid
+        if (!Address.IsValid(toAddress.ToString()))
+        {
+            Debug.LogError("Invalid recieve address. Can't send transaction");
+            return null;
+        }
+        // Check amount to send is more than 0
+        if (microAlgoAmount <= 0)
+        {
+            Debug.LogError("microAlgo Amount is less than 0.");
             return null;
         }
 
