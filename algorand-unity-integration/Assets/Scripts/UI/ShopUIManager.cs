@@ -87,12 +87,12 @@ public class ShopUIManager : MonoBehaviour
 
             var playerAccount = playerWallet.GetPlayerAccount();
             ulong microAlgoAmount = (ulong)item.MicroAlgoCost;
-            m_algoSceneHelper.MakePayment(playerAccount, new Address(AppConstants.APP_WALLET_ADDRESS), microAlgoAmount, $"UNITY GAME TEST -> Buy item '{item.Name}'", () =>
+            string txId = m_algoSceneHelper.MakePayment(playerAccount, new Address(AppConstants.APP_WALLET_ADDRESS), microAlgoAmount, $"UNITY GAME TEST -> Buy item '{item.Name}'", () =>
             {
                 Debug.Log("Payment complete!");
             });
 
-            Debug.Log($"Player paid for '{item.Name}' item for '{Utils.MicroalgosToAlgos(item.MicroAlgoCost)}' ALGO");
+            Debug.Log($"Player paid for '{item.Name}' item for '{Utils.MicroalgosToAlgos(item.MicroAlgoCost)}' ALGO (TxId: {txId})");
         }
     }
 }

@@ -36,10 +36,10 @@ public class RewardPlayerBtn : MonoBehaviour
         // Reward player with 0.05 ALGO
         double ALGOrewardAmount = 0.05;
         ulong microAlgoRewardAmount = Utils.AlgosToMicroalgos(ALGOrewardAmount);
-        m_algorandSceneHelper.MakePayment(gameAccount, playerAccount.Address, microAlgoRewardAmount, "UNITY GAME TEST -> Reward", () =>
+        string txId = m_algorandSceneHelper.MakePayment(gameAccount, playerAccount.Address, microAlgoRewardAmount, "UNITY GAME TEST -> Reward", () =>
         {
             Debug.Log($"Reward transaction complete");
         });
-        Debug.Log($"Rewarded player '{ALGOrewardAmount}' ALGO");
+        Debug.Log($"Rewarded player '{ALGOrewardAmount}' ALGO (TxId: {txId})");
     }
 }

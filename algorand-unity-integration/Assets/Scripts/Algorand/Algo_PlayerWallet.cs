@@ -36,7 +36,7 @@ public class Algo_PlayerWallet : MonoBehaviour
     private void PrintPlayerWalletInfo(Account algoAccount)
     {
         Debug.Log($"Wallet Address = '{m_playerAlgoAccount.Address}'");
-        Debug.Log($"Mnemonic = '{m_playerAlgoAccount.ToMnemonic()}");
+        //Debug.Log($"Mnemonic = '{m_playerAlgoAccount.ToMnemonic()}");
 
         if (m_algodAPI != null) 
         {
